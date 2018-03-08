@@ -26,6 +26,9 @@ app.get('/', (req, res) => {
     res.send('Hello, Clarice. It\'s so nice to see you again')
 })
 
+const creatureController = require('./controllers/creatureController')
+app.use('/api/creatures', creatureController)
+
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
