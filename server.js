@@ -20,14 +20,19 @@ db.on('open', () => {
 // MIDDLEWARE
 app.use(logger('dev'))
 app.use(bodyParser.json())
+app.use(express.static(`${__dirname}/client/build`))
 
-//set up routes
+//set up api routes
 app.get('/', (req, res) => {
     res.send('Hello, Clarice. It\'s so nice to see you again')
 })
 
 const creatureController = require('./controllers/creatureController')
 app.use('/api/creatures', creatureController)
+
+app.get('/*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`)
+})
 
 const PORT = process.env.PORT || 3001
 
